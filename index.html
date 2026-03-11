@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: sans-serif; background: var(--tg-theme-bg-color); color: var(--tg-theme-text-color); }
+        .product { border: 1px solid #ddd; padding: 10px; margin: 10px; border-radius: 8px; }
+        button { background: var(--tg-theme-button-color); color: var(--tg-theme-button-text-color); border: none; padding: 10px 20px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🛍️ Каталог товаров</h1>
+    <div id="products"></div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand(); // Раскрыть на весь экран
+
+        // Пример товаров
+        const products = [
+            { id: 1, name: "Товар 1", price: 100 },
+            { id: 2, name: "Товар 2", price: 200 },
+            { id: 3, name: "Товар 3", price: 300 }
+        ];
+
+        const container = document.getElementById('products');
+        products.forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'product';
+            div.innerHTML = `
+                <h3>${p.name}</h3>
+                <p>Цена: ${p.price} ₽</p>
+                <button onclick="addToCart(${p.id})">В корзину</button>
+            `;
+            container.appendChild(div);
+        });
+
+        function addToCart(id) {
+            // Логика добавления (нужно доработать)
+            tg.showPopup({ message: 'Товар добавлен!' });
+        }
+    </script>
+</body>
+</html>
